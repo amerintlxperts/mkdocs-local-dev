@@ -7,7 +7,9 @@ This repository can be used to quickly setup a local dev environment to run your
 ## 🔧 Prerequisites
 
 - Git
-- PowerShell (Windows)
+- PowerShell (running as administrator)
+- ExecutionPolicy set to bypass
+- Microsoft Visual C++ 14.0 or greater is required
 - Internet access
 
 ---
