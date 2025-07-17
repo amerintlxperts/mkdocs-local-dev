@@ -11,9 +11,22 @@ if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
     Write-Host "Python installed. You may need to restart PowerShell if 'python' is still not recognized."
 }
 
+# === 0b. Verify Python is now available ===
+if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
+    Write-Error "Python was installed but is not available in this session. Please restart PowerShell and run the script again."
+    exit 1
+}
+
 # === 1. Setup Virtual Environment ===
 python -m venv venv
+
+if (-not (Test-Path .\venv\Scripts\Activate.ps1)) {
+    Write-Error "Virtual environment creation failed. 'Activate.ps1' not found."
+    exit 1
+}
+
 .\venv\Scripts\Activate.ps1
+
 
 # === 2. Install MkDocs and Plugins ===
 python -m pip install --upgrade pip
