@@ -24,7 +24,7 @@ cd mkdocs-local-dev
 ### 2. Run the setup
 
 ```bash
-setup_local_mkdocs.bat '<track>'
+./setup_local_mkdocs.bat '<track>'
 ```
 
 > Replace `<track>` with your desired track name (ot, secops, cloud, lanedge, sase)
