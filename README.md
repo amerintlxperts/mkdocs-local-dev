@@ -8,7 +8,7 @@ This repository can be used to quickly setup a local dev environment to run your
 
 - Git
 - PowerShell (running as administrator)
-- ExecutionPolicy set to bypass
+- ExecutionPolicy set to bypass (Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass)
 - Microsoft Visual C++ 14.0 or greater is required
 - Internet access
 
