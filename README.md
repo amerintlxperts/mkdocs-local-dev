@@ -26,7 +26,7 @@ cd mkdocs-local-dev
 ### 2. Run the setup
 
 ```bash
-./setup_local_mkdocs.bat '<track>'
+./setup_local_mkdocs.bat track
 ```
 
 > Replace `<track>` with your desired track name (ot, secops, cloud, lanedge, sase)
@@ -38,8 +38,8 @@ cd mkdocs-local-dev
 After setup:
 
 ```powershell
-cd playground\<track>
-..\..\venv\Scripts\Activate.ps1
+cd <track>-playground
+..\venv\Scripts\Activate.ps1
 mkdocs serve
 ```
 
@@ -50,7 +50,7 @@ Then open: [http://localhost:8000](http://localhost:8000)
 ## 🧹 To start fresh
 
 ```powershell
-Remove-Item -Recurse -Force .\playground
+Remove-Item -Recurse -Force .\<track>-playground
 ```
 
 Then re-run the setup.

@@ -43,32 +43,25 @@ pip install mkdocs mkdocs-material `
 $track = $args[0]
 if (-not $track) {
     Write-Error "Usage: .\setup_local_mkdocs.ps1 <track>"
+    exit 1
 }
 
-New-Item -ItemType Directory -Force -Path "playground"
-Set-Location playground
+New-Item -ItemType Directory -Force -Path "$track-playground"
+Set-Location "$track-playground"
 
-git clone https://github.com/amerintlxperts/theme
-git clone https://github.com/amerintlxperts/$track
+# Clone the theme repository
+git clone https://github.com/amerintlxperts/theme.git
+
+# Create docs directory and clone track content directly into it
+New-Item -ItemType Directory -Force -Path "docs"
+Set-Location docs
+git clone https://github.com/amerintlxperts/$track.git .
+Set-Location ..
 
 # === 4. Setup Docs Structure ===
-Set-Location $track
 
 # Copy mkdocs.yml from theme
-Copy-Item ../theme/mkdocs.yml .
-
-# Create docs folder
-New-Item -ItemType Directory -Force -Path "docs"
-
-# Move everything except .git and docs into docs/
-Get-ChildItem -Force | Where-Object {
-    $_.Name -ne "docs" -and $_.Name -ne ".git"
-} | ForEach-Object {
-    Move-Item -Path $_.FullName -Destination "docs" -Force
-}
-
-# Move mkdocs.yml back to project root
-Move-Item docs\mkdocs.yml . -Force
+Copy-Item theme/mkdocs.yml .
 
 # === Add landing-page.css to docs/ ===
 $landingCssPath = "docs\landing-page.css"
@@ -81,8 +74,8 @@ $landingCssPath = "docs\landing-page.css"
 
 # === 5. Adjust mkdocs.yml for Local Serve ===
 (Get-Content mkdocs.yml) `
-    -replace 'custom_dir: !ENV \[CUSTOM_DIR, ".*?"\]', 'custom_dir: ../theme' `
-    -replace 'docs/theme/covers/stylesheets/pdf.scss', '../theme/covers/stylesheets/pdf.scss' `
+    -replace 'custom_dir: !ENV \[CUSTOM_DIR, ".*?"\]', 'custom_dir: theme' `
+    -replace 'docs/theme/covers/stylesheets/pdf.scss', 'theme/covers/stylesheets/pdf.scss' `
     | Set-Content mkdocs.yml
 
 # === 5b. Remove 'exporter' plugin block from mkdocs.yml ===
@@ -99,7 +92,7 @@ $themeAssets = @(
     "favicon.ico"
 )
 
-$sourceTheme = "..\theme"
+$sourceTheme = "theme"
 $destTheme = "docs\theme"
 New-Item -ItemType Directory -Force -Path $destTheme | Out-Null
 
@@ -111,8 +104,8 @@ foreach ($asset in $themeAssets) {
 # === 6. Complete ===
 Write-Host "`n✅ Setup complete."
 Write-Host "To serve your docs:"
-Write-Host "`n    cd playground\$track"
-Write-Host "    ..\..\venv\Scripts\Activate.ps1"
+Write-Host "`n    cd $track-playground"
+Write-Host "    ..\venv\Scripts\Activate.ps1"
 Write-Host "    mkdocs serve`n"
 
 
