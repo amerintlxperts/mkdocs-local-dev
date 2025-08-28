@@ -26,6 +26,7 @@ cd mkdocs-local-dev
 ### 2. Run the setup
 
 ```bash
+cd windows
 ./setup_local_mkdocs.bat track
 ```
 
