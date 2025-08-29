@@ -135,6 +135,7 @@ try {
 # Install MkDocs and all plugins
 Write-Host "Installing MkDocs and plugins..."
 pip install mkdocs mkdocs-material `
+    pymdown-extensions `
     mkdocs-drawio mkdocs-drawio-exporter `
     mkdocs-exclude mkdocs-awesome-pages-plugin `
     mkdocs-content-tabs mkdocs-asciinema-player `
@@ -211,5 +212,6 @@ Write-Host "To serve your docs:"
 Write-Host "`n    cd $track-playground"
 Write-Host "    ..\venv\Scripts\Activate.ps1"
 Write-Host "    mkdocs serve`n"
+
 
 
