@@ -19,6 +19,12 @@ This repository provides scripts to quickly setup a local development environmen
 - Xcode Command Line Tools (will be prompted to install if missing)
 - Internet access
 
+### Linux/Ubuntu
+- Git
+- Python 3.9+ (3.11 recommended)
+- Build tools (will be auto-installed if missing): build-essential, python3-dev
+- Internet access
+
 ---
 
 ## 🚀 Getting Started
@@ -44,6 +50,12 @@ cd macos
 ./setup_local_mkdocs.sh <track>
 ```
 
+#### Linux/Ubuntu
+```bash
+cd linux
+./setup_local_mkdocs.sh <track>
+```
+
 > Replace `<track>` with your desired track name (ot, secops, cloud, lanedge, sase)
 
 ---
@@ -59,7 +71,7 @@ cd <track>-playground
 mkdocs serve
 ```
 
-#### macOS
+#### macOS/Linux
 ```bash
 cd <track>-playground
 source ../venv/bin/activate
@@ -88,7 +100,7 @@ The `<track>-playground/docs/` directory is a fully functional git repository. Y
 Remove-Item -Recurse -Force .\<track>-playground
 ```
 
-#### macOS
+#### macOS/Linux
 ```bash
 rm -rf <track>-playground
 ```
